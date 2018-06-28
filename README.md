@@ -23,7 +23,7 @@ int main() {
     button.rise(callback(buttonRise));
     button.fall(callback(buttonFall));
 
-    bool current_state = sdCd;
+    bool current_state = button;
 
     printf("state: %u\n", sd_inserted);
 

@@ -34,7 +34,7 @@ DebounceIn::DebounceIn(PinName pin, PinMode mode) :
 void DebounceIn::rise(Callback<void()> cb, int32_t timeout) {
     if (cb) {
         _cb[0] = cb;
-        _timeout_interval[1] = timeout;
+        _timeout_interval[0] = timeout;
         _interrupt.rise(callback(this, &DebounceIn::intRiseCb));
 
     } else {

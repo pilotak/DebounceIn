@@ -1,7 +1,7 @@
 /*
 MIT License
 
-Copyright (c) 2018 Pavel Slama
+Copyright (c) 2020 Pavel Slama
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,8 +26,10 @@ SOFTWARE.
 #define DEBOUNCEIN_H
 
 #include "mbed.h"
+#include <chrono>
+using namespace std::chrono;
 
-#define DEFAULT_DEBOUNCE 20000  // us
+#define DEFAULT_DEBOUNCE 20ms
 
 class DebounceIn {
   public:
@@ -38,21 +40,21 @@ class DebounceIn {
     } Type;
 
     explicit DebounceIn(PinName pin, PinMode mode = PullNone);
-    void rise(Callback<void()> cb, int32_t timeout = DEFAULT_DEBOUNCE);
-    void fall(Callback<void()> cb, int32_t timeout = DEFAULT_DEBOUNCE);
+    void rise(Callback<void()> cb, microseconds timeout = DEFAULT_DEBOUNCE);
+    void fall(Callback<void()> cb, microseconds timeout = DEFAULT_DEBOUNCE);
     int32_t read();
 
     operator int();
 
   private:
     InterruptIn _interrupt;
-    Timeout _timeout[2];
+    LowPowerTimeout _timeout[2];
     Callback<void()> _cb[2];
     void intRiseCb();
     void intFallCb();
     void timeoutRiseCb();
     void timeoutFallCb();
-    int32_t _timeout_interval[2];
+    microseconds _timeout_interval[2];
 };
 
 #endif

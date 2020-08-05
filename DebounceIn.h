@@ -48,7 +48,7 @@ class DebounceIn {
 
   private:
     InterruptIn _interrupt;
-    LowPowerTimeout _timeout[2];
+    Timeout _timeout[2];
     Callback<void()> _cb[2];
     void intRiseCb();
     void intFallCb();

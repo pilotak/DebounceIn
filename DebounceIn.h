@@ -39,7 +39,7 @@ class DebounceIn {
         Fall
     } Type;
 
-    explicit DebounceIn(PinName pin, PinMode mode = PullNone);
+    DebounceIn(PinName pin, PinMode mode = PullNone);
     void rise(Callback<void()> cb, microseconds timeout = DEFAULT_DEBOUNCE);
     void fall(Callback<void()> cb, microseconds timeout = DEFAULT_DEBOUNCE);
     int32_t read();
